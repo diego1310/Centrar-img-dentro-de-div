@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Imagen </title>
+	<style>
+		body{
+			background: #D8D8D8;
+			font: 16px helvetica
+		}
+		.center{
+			background: #fff;
+			box-shadow: 0 0 6px rgba(0,0,0, 0.5);
+			-webkit-box-shadow: 0 0 6px rgba(0,0,0, 0.5);
+			margin: 0 auto;
+			min-height: 600px;
+			padding: 0 2em;
+			text-align: center;
+			width: 90%;
+		}
+		.center h1{
+			border-bottom: 1px solid #848484;
+			color: #0174DF;
+			display: block;
+			margin: 0 auto;
+			padding-top: 1em;
+			text-align: center;
+
+		}
+		.contenerdor_img{
+			display: inline-block;
+			border: 1em solid #F2F2F2;
+			box-shadow: 0 0 6px rgba(0,0,0, 0.5);
+			-webkit-box-shadow: 0 0 6px rgba(0,0,0, 0.5);
+			height: 300px;
+			margin: 3em 1em 0 1em;
+			vertical-align: top;
+			width: 300px;
+		}
+		.contenerdor_img a{
+			box-shadow: 0 0 2px rgba(0,0,0, 0.5);
+			-webkit-box-shadow: 0 0 2px rgba(0,0,0, 0.5);
+			display: block;
+			height: 100%;
+			overflow: hidden;
+			width: 100%;
+			position: relative;
+			text-align:center;
+
+			-webkit-transition: all 0.6s ease;
+		}
+		.contenerdor_img a .mascara{
+			background: #0174DF;
+			opacity: 0;
+			height: 100%;
+			position: absolute;
+			width: 100%;
+			z-index: 2;
+
+			transition: all 1s ease;
+			-webkit-transition: all 0.6s ease;
+		}
+		.contenerdor_img a .mascara:hover{
+			opacity: 0.5;
+			transition: all 1s ease;
+			-webkit-transition: all 0.6s ease;
+		}
+		.contenerdor_img a .mascara p{
+			background: #fff;
+			color: #000;
+			display: block;
+			text-shadow: 0 0 6px rgba(255,255,255, 1);
+			-webkit-text-shadow: 0 0 6px rgba(255,255,255, 1);
+			padding: .5em 0;
+			position: absolute;
+			top: 50%;
+			width: 100%
+		}
+
+		.contenerdor_img a img{
+			display: inline-block;
+			vertical-align: middle;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="center">
+		<h1>Centrar img dentro del un div sin importar su tamaño</h1>
+
+		<div class="contenerdor_img">
+			<a href="" data-img="img/jeans.jpg" href="">
+				<div class="mascara">
+					<p>Ver detalle</p>
+				</div>
+				<img src="img/jeans.jpg" alt="">
+			</a>
+		</div>
+
+
+		<div class="contenerdor_img">
+			<a href="" data-img="img/camisa.jpg" href="">
+				<div class="mascara">
+					<p>Ver detalle</p>
+				</div>
+				<img src="img/camisa.jpg" alt="">
+			</a>
+		</div>
+
+		<div class="contenerdor_img">
+			<a href="" data-img="img/polo.jpg" href="">
+				<div class="mascara">
+					<p>Ver detalle</p>
+				</div>
+				<img src="img/polo.jpg" alt="">
+			</a>
+		</div>
+
+	</div>
+
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+
+	<script>
+
+		$(document).on('ready',inicio);
+
+		function inicio(){
+		
+			$('.contenerdor_img a').on('click',linkImg);
+
+			$('.contenerdor_img a img').each( centrarImg);
+		
+		}
+
+		function linkImg(){
+					var url = $(this).data('img'); 
+					$('.contenerdor_img a').attr('href',url);
+		}
+
+		function centrarImg() {
+							 
+				if( $(this).height() < $(this).parent('.contenerdor_img a').height() || $(this).width() < $(this).parent('.contenerdor_img a').width() ){
+
+					var cssCenter = { 
+									 "width" : "100%"
+									};
+					
+				}else if( $(this).height() > $(this).parent('.contenerdor_img a').height()*2 || $(this).width() > $(this).parent('.contenerdor_img a').width()*2 ){
+
+					var cssCenter = { 
+									 "width" : "100%"
+									};
+
+				}else{
+
+					var top = Math.floor(($(this).parent('.contenerdor_img a').height() - $(this).height())/2);
+					var left = Math.floor(($(this).parent('.contenerdor_img a').width() - $(this).width())/2);
+					
+					var mTop = top+"px";
+					var mLeft = left+"px";
+
+					var cssCenter 	= 	{ 
+									  "margin-top" : mTop,
+									  "margin-left" : mLeft
+									};
+				}
+
+				$(this).css(cssCenter);
+							
+			}
+	</script>
+</body>
+</html>
